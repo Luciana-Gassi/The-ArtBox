@@ -1,8 +1,8 @@
-<?php 
+<?php
 require 'dbconnection.php';
 require 'includes/header.php';
 ?>
-
+<!-- formulaire d'ajout d'une oeuvre -->
 <form action="traitement.php" method="POST">
     <div class="champ-formulaire">
         <label for="titre">Titre de l'œuvre</label>
@@ -24,4 +24,4 @@ require 'includes/header.php';
     <input type="submit" value="Valider" name="submit">
 </form>
 
-<?php require 'includes/footer.php'; ?>
+<?php require 'includes/footer.php';?>

@@ -1,9 +1,9 @@
-<?php 
+<?php
 
-// connection to the database "artbox"
+// Connection a la base de données
 $connectDB = mysqli_connect("localhost", "root", "", "artbox");
 
-// Verifica della correttezza della connessione
+// Verification de la connection
 if (!$connectDB) {
     die("Connection failed: " . mysqli_connect_error());
 }
