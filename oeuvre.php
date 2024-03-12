@@ -1,27 +1,31 @@
 <?php
-    require 'header.php';
-    require 'oeuvres.php';
+    require 'dbconnection.php';
+    require 'includes/header.php';
+ 
+// Si l'URL ne contient pas d'id, on redirige sur la page d'accueil
+if(empty($_GET['id'])) {
+    header('Location: index.php');
+}
 
-    // Si l'URL ne contient pas d'id, on redirige sur la page d'accueil
-    if(empty($_GET['id'])) {
-        header('Location: index.php');
-    }
+// Retrieve the ID parameter from the URL
+$id = mysqli_real_escape_string($connectDB, $_GET['id']);
 
-    $oeuvre = null;
+// Fetching data for the specific artwork
+$query = "SELECT * FROM oeuvres WHERE id = $id";
+$result = mysqli_query($connectDB, $query);
 
-    // On parcourt les oeuvres du tableau afin de rechercher celle qui a l'id précisé dans l'URL
-    foreach($oeuvres as $o) {
-        // intval permet de transformer l'id de l'URL en un nombre (exemple : "2" devient 2)
-        if($o['id'] === intval($_GET['id'])) {
-            $oeuvre = $o;
-            break; // On stoppe le foreach si on a trouvé l'oeuvre
-        }
-    }
+if (!$result) {
+    die("Query failed: " . mysqli_error($connectDB));
+}
 
-    // Si aucune oeuvre trouvé, on redirige vers la page d'accueil
-    if(is_null($oeuvre)) {
-        header('Location: index.php');
-    }
+$oeuvre = mysqli_fetch_assoc($result);
+
+// Si aucune oeuvre trouvée, on redirige vers la page d'accueil
+if(!$oeuvre) {
+    header('Location: index.php?error=not_found');
+    exit();
+}
+
 ?>
 
 <article id="detail-oeuvre">
@@ -37,4 +41,4 @@
     </div>
 </article>
 
-<?php require 'footer.php'; ?>
+<?php require 'includes/footer.php'; ?>

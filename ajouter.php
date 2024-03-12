@@ -1,4 +1,7 @@
-<?php require 'header.php'; ?>
+<?php 
+require 'dbconnection.php';
+require 'includes/header.php';
+?>
 
 <form action="traitement.php" method="POST">
     <div class="champ-formulaire">
@@ -21,4 +24,4 @@
     <input type="submit" value="Valider" name="submit">
 </form>
 
-<?php require 'footer.php'; ?>
+<?php require 'includes/footer.php'; ?>
