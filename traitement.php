@@ -40,6 +40,7 @@ if(isset($_POST['submit'])) {
         if($result) {
             // Get the ID of the new one
             $new_id = mysqli_insert_id($connectDB);
+            $query = "SELECT * FROM oeuvres WHERE titre = $titre AND artiste = $artiste";
             // Redirect to the single oeuvre.php page with the new ID
             header("Location: oeuvre.php?id=$new_id");
             exit(); // Stop further execution
